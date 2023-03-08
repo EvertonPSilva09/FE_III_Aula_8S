@@ -1,29 +1,22 @@
 import { useState } from "react";
 
-["", ""];
-
-[{ name }, { cidade }];
-
 function App() {
-  const [count, setCount] = useState([]);
-
-  // function incrementValue(){
-  //   // const copyCount = [...count];
-  //   // copyCount.push(count.length);
-  //   setCount([...count, count.length]);
-  // }
-  // dentro do return
-  /* <h2>{count}</h2> */
-  // <button onClick={incrementValue}>Incrementar</button>
-
   const [listaNomes, setListaNomes] = useState([]);
-  const [inputText, setInputText] = useState("");
-  const [inputCidade, setInputCidade] = useState("");
+  const [inputNome, setInputNome] = useState("");
+  const [inputIdade, setInputIdade] = useState();
+  const [inputPokemon, setInputPokemon] = useState("");
 
   function addName() {
-    setListaNomes([...listaNomes, inputText]);
-    setInputText("");
-    setInputCidade("");
+    const add = {
+      name: inputNome,
+      idade: inputIdade,
+      pokemon: inputPokemon,
+    };
+
+    setListaNomes([...listaNomes, add]);
+    setInputNome("");
+    setInputIdade();
+    setInputPokemon("");
   }
 
   return (
@@ -32,18 +25,24 @@ function App() {
       <ul>
         {listaNomes.map((item, indice) => (
           <li key={indice}>
-            {item.name} - {item.cidade}
+            {item.name} - {item.idade} - {item.pokemon}
           </li>
         ))}
       </ul>
       <input
-        value={inputText}
-        onChange={(event) => setInputText(event.target.value)}
+        placeholder="Insira seu nome"
+        value={inputNome}
+        onChange={(event) => setInputNome(event.target.value)}
       />
-
       <input
-        value={cidade}
-        onChange={(event) => setInputCidade(event.target.value)}
+        placeholder="Insira sua idade"
+        value={inputIdade}
+        onChange={(event) => setInputIdade(event.target.value)}
+      />
+      <input
+        placeholder="Pokemon favorito"
+        value={inputPokemon}
+        onChange={(event) => setInputPokemon(event.target.value)}
       />
 
       <button onClick={addName}>Incluir</button>
